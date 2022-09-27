@@ -12,6 +12,7 @@ services:
       - /var/www/data/yarn/cache:/usr/local/share/.cache/yarn:cached
       - /var/www/data/npm:/root/.npm:cached
     working_dir: /app
+    command: "yarn dev -- --port 8000 -H 0.0.0.0"
     ports:
       - "8000:8000"
       - "9929:9929"

@@ -1,4 +1,4 @@
-FROM node:16.14.0-alpine
+FROM node:16.17.1-alpine3.16
 # Also exposing VSCode debug ports
 EXPOSE 8000 9929 9930
 
