@@ -33,6 +33,18 @@ module.exports = {
         trackingId: "UA-140749529-2",
       },
     },
+    {
+      resolve: `gatsby-source-firestore-easy`,
+      options: {
+        adminCredential: {
+          credential: require("./htra-boutique-firebase-adminsdk-wftta-f4adc2876a.json"),
+          databaseURL: 'https://htra-boutique.firebaseio.com',
+        },
+        collections: [
+          'product',
+        ]
+      },
+    },
   ],
   siteMetadata: {
     title: `Huong Tra boutique`,
