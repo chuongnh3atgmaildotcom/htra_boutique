@@ -42,6 +42,7 @@ module.exports = {
         },
         collections: [
           'product',
+          'cat'
         ]
       },
     },
