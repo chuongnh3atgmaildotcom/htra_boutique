@@ -5,10 +5,14 @@ import Footer from "gatsby-theme-gallery/src/components/Footer";
 import Gallery from "gatsby-theme-gallery/src/components/Gallery";
 import useSiteMetadata from "gatsby-theme-gallery/src/hooks/useSiteMetadata";
 import { graphql } from "gatsby"
+import lodash from "lodash"
 import type { PageProps } from "gatsby"
+import type { ImageFormatType } from "gatsby-transformer-sharp"
+import type CSS from 'csstype';
 import Img from "gatsby-image"
 
-const HomePage = ({data}: PageProps<ProductListType>) => {
+const pcontainerstyle:CSS.Properties={display:'flex', flexDirection:'row', width:"100%"};
+const HomePage = ({ data }: PageProps<ProductListType>) => {
   const siteMetadata = useSiteMetadata();
 
   return (
@@ -16,28 +20,30 @@ const HomePage = ({data}: PageProps<ProductListType>) => {
       <Header />
       <Gallery />
       {console.log(data)}
-      {data.allProduct.edges.map(({node:{id,name,img,price,slug}}) => (
-        <div className="product-box">
-          <img key={id} src={img}></img>
-          <span>{name}</span>
-        </div>
+      <div className="product" style={pcontainerstyle} >
+        {data.allFireimage.edges.map(({ node: { id, name, desc, imgSrc, price, slug } }) => (
+          <div key={id} className="product-box" style={({ flexGrow: "1"})}>
+            {!!lodash.get(imgSrc, 'childImageSharp.fluid') && <Img fluid={imgSrc.childImageSharp.fluid} />}
+            <span>{name}</span>
+          </div>
         )
-      )}
+        )}
+      </div>
       {siteMetadata.author && <Footer />}
-      <pre>{JSON.stringify(data, null, 4)}</pre>
     </Layout>
   );
 };
 type ProductListType = {
-  allProduct: {
+  allFireimage: {
     edges: [
       {
         node: {
+          desc: string,
           id: string,
           name: string,
-          img: string,
           price: number,
-          slug: string
+          slug: string,
+          imgSrc: ImageFormatType
         }
       }
     ]
@@ -45,19 +51,26 @@ type ProductListType = {
 }
 
 export const products = graphql`
-  {
-    allProduct {
-      edges {
-        node {
-          id
-          name
-          img
-          price
-          slug
+{
+  allFireimage {
+    edges {
+      node {
+        desc
+        id
+        name
+        price
+        slug
+        imgSrc {
+          childImageSharp {
+            fluid {
+              ...GatsbyImageSharpFluid
+            }
+          }
         }
       }
     }
   }
+}
 `
 
 export default HomePage;

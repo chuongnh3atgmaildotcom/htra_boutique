@@ -25,6 +25,17 @@ module.exports = {
         socialLogins: ["google", "github"],
       },
     },
+    {
+      resolve: "gatsby-source-fireimage",
+      options: {
+        credential: require("./htra-boutique-firebase-adminsdk-wftta-f4adc2876a.json"),
+        appConfig: {
+          databaseURL: "https://htra-boutique.firebaseio.com",
+        },
+        //your collection name, books for example
+        collection: "product",
+      },
+    },
     "gatsby-plugin-typescript",
     "gatsby-plugin-emotion",
     {
@@ -38,7 +49,7 @@ module.exports = {
       options: {
         adminCredential: {
           credential: require("./htra-boutique-firebase-adminsdk-wftta-f4adc2876a.json"),
-          databaseURL: 'https://htra-boutique.firebaseio.com',
+          databaseURL: "https://htra-boutique.firebaseio.com",
         },
         collections: [
           'product',
@@ -51,5 +62,8 @@ module.exports = {
     title: `Huong Tra boutique`,
     description: `ts, gatsby, firebase`,
     author: `me`
+  },
+  flags: {
+    DEV_SSR: true,
   },
 };
