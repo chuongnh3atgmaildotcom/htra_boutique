@@ -25,8 +25,11 @@
   "author": "Emmanuel Pilande",
   "license": "MIT",
   "devDependencies": {
+    "@types/react": "^18.0.21",
+    "@types/react-dom": "^18.0.6",
     "@types/theme-ui": "^0.6.0",
     "check-peer-dependencies": "^4.1.0",
-    "gatsby-source-firestore-easy": "^1.1.0"
+    "gatsby-source-firestore-easy": "^1.1.0",
+    "types-installer": "^1.6.3"
   }
 }
