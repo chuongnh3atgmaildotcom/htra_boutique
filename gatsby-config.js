@@ -64,6 +64,7 @@ module.exports = {
     author: `me`
   },
   flags: {
-    DEV_SSR: true,
+    FAST_DEV: true,
+    FAST_REFRESH: true
   },
 };
